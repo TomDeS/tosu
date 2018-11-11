@@ -1,0 +1,12 @@
+<div class="card">
+
+  <ul *ngFor="let product of products; let i = index;">
+    
+    <li>
+      {{ product.category }} &bull; {{ product.name }} &bull; {{ product.price | currency:'EUR'}}
+      <button (click)= "addToCart()">add</button>
+    </li>
+
+  </ul>
+
+</div>
