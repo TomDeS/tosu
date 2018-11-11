@@ -1,0 +1,36 @@
+<div class="card">
+  <input #newPlayer (keyup.enter)="addPlayer(newPlayer.value)" (blur)="addPlayer(newPlayer.value); newPlayer.value='' ">
+  <button (click)="addPlayer(newPlayer.value)" class="btn btn-outline-primary">Add</button>
+  <button (click)="startRandom()" class="btn btn-outline-success">start</button>
+
+
+  <ul>
+    <li *ngFor="let player of players; let i = index;">
+      <button type="button" class="close" aria-label="Close" (click)='onSelect(i)'>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{player.name}}
+      <div class="progress">
+        <div class="progress-bar" id="{{ 'progress-bar' + i }}" role="progressbar" style.width="{{player.score}}%">
+          {{player?.score}} points
+        </div>
+      </div>
+    </li>
+  </ul>
+
+
+  <ul>
+    <li *ngFor="let winner of winners; let i = index;">
+      {{winner.timestamp}}
+      {{winner.name}}
+      {{winner.score}}
+    </li>
+  </ul>
+
+  <p id="history">
+
+  </p>
+  <p class="disclaimer">
+    Published under the <a href="http://unlicense.org/" target="_blank">Unlicense-license</a>.
+  </p>
+</div>
