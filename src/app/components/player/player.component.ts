@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 // Services
 import { Player } from '../../interfaces/player.interface';
-import { TosuService } from '../../services/tosu.service';
+import { PlayerService } from '../../services/player.service';
 
 
 
@@ -36,11 +36,11 @@ export class PlayerComponent implements OnInit {
 
   onSelect(i: number): void {
     this.players.splice(i, 1);
-    this.tosuService.updateLocalStorage(this.players);
+    this.playerService.updateLocalStorage(this.players);
   }
 
   getDefaultPlayers(): void {
-    this.players = this.tosuService.getDefaultPlayers();
+    this.players = this.playerService.getDefaultPlayers();
   }
 
 
@@ -49,16 +49,16 @@ export class PlayerComponent implements OnInit {
     const minScore: number = 5;
     const maxScore: number = (playersLength >= (100 - minScore)) ? playersLength : 100;
 
-    this.tosuService.assignRandomValues(this.players, playersLength, this.unit, this.className, minScore, maxScore);
+    this.playerService.assignRandomValues(this.players, playersLength, this.unit, this.className, minScore, maxScore);
   }
 
 
-  constructor(private tosuService: TosuService) { }
+  constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
     this.getDefaultPlayers();
     // this.getHistory(); @TODO implement history based on local storage
-    this.winners = this.tosuService.getWinners();
+    this.winners = this.playerService.getWinners();
   }
 
 

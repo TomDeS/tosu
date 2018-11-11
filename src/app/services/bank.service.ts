@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import { TosuService } from '../services/tosu.service';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +32,7 @@ export class BankService {
   getRandomBankIdentification(country: string) {
     // Array source: https://www.betaalvereniging.nl/en/focus/giro-based-and-online-payments/bank-identifier-code-bic-for-sepa-transactions/
     const dutchBIC: string[] = ['AABN', 'ABNA', 'ADYB', 'AEGO', 'ANDL', 'ARBN', 'ARSN', 'ASNB', 'ATBA', 'BCDM', 'BCIT', 'BICK', 'BINK', 'BKCH', 'BKMG', 'BLGW', 'BMEU', 'BNDA', 'BNGH', 'BNPA', 'BOFA', 'BOFS', 'BOTK', 'BUNQ', 'CHAS', 'CITC', 'CITI', 'COBA', 'DEUT', 'DHBN', 'DLBK', 'DNIB', 'EBUR', 'FBHL', 'FLOR', 'FRGH', 'FRNX', 'FTSB', 'FVLB', 'GILL', 'HAND', 'HHBA', 'HSBC', 'ICBK', 'INGB', 'ISAE', 'ISBK', 'KABA', 'KASA', 'KNAB', 'KOEX', 'KRED', 'LOCY', 'LOYD', 'LPLN', 'MHCB', 'MOYO', 'NNBA', 'NWAB', 'PCBC', 'RABO', 'RBRB', 'SNSB', 'SOGE', 'TEBU', 'TRIO', 'UBSW', 'UGBI', 'VOWA', 'ZWLB'];
-    const bic: string = dutchBIC[this.getRandomNumber(0, dutchBIC.length - 1)];
+    const bic: string = dutchBIC[this.tosuService.getRandomNumber(0, dutchBIC.length - 1)];
     const bicValue: string = this.getLetterValue(bic);
 
 
@@ -45,7 +48,7 @@ export class BankService {
 
     // get {count} random base 10 numbers
     for (i = 0; i < count; i++) {
-      digits[i] = this.getRandomNumber(0, maxDigit);
+      digits[i] = this.tosuService.getRandomNumber(0, maxDigit);
     }
 
 
@@ -56,12 +59,12 @@ export class BankService {
     if (!pass11) {
 
       // take two random digits
-      p1 = this.getRandomNumber(0, maxDigit);
-      p2 = this.getRandomNumber(0, maxDigit);
+      p1 = this.tosuService.getRandomNumber(0, maxDigit);
+      p2 = this.tosuService.getRandomNumber(0, maxDigit);
 
       // make sure we didn't select twice the same digit
       while (p1 === p2) {
-        p2 = this.getRandomNumber(0, maxDigit);
+        p2 = this.tosuService.getRandomNumber(0, maxDigit);
       }
 
       for (j = 0; j <= maxDigit && pass11 === false; j++) {
@@ -157,11 +160,6 @@ export class BankService {
     return result;
   }
 
+  constructor(private tosuService: TosuService) { }
 
-  getRandomNumber(lower: number, upper: number) {
-    return Math.floor(Math.random() * (upper - lower + 1)) + lower;
-
-  }
-
-  constructor() { }
 }
