@@ -18,8 +18,8 @@ export class PlayerComponent implements OnInit {
 
   players: Player[];
   winners: Player[];
-  unit: string = '%';
-  className: string = 'progress-bar';
+  unit = '%';
+  className = 'progress-bar';
 
 
   addPlayer(newPlayer): void {
@@ -46,7 +46,7 @@ export class PlayerComponent implements OnInit {
 
   startRandom(): void {
     const playersLength: number = this.players.length;
-    const minScore: number = 5;
+    const minScore = 5;
     const maxScore: number = (playersLength >= (100 - minScore)) ? playersLength : 100;
 
     this.playerService.assignRandomValues(this.players, playersLength, this.unit, this.className, minScore, maxScore);

@@ -1,0 +1,33 @@
+<div class="card" style="display: flex; justify-content: space-around">
+
+  <div>
+
+    <h3>Foodz</h3>
+    <ul *ngFor="let product of products; let i = index;">
+
+      <li>
+        {{ product.name }}
+        <button (click)="addToCart(product.$key,i)">{{ product.price | currency:'EUR'}} | +</button>
+      </li>
+
+    </ul>
+  </div>
+
+  <div>
+    <h3>Basket</h3>
+    <ul *ngFor="let product of basket; let i = index;">
+
+      <li>
+        <button (click)="updateQuantity(product.$productKey, -1)">-</button>
+        {{product.quantity}}
+        <button (click)="updateQuantity(product.$productKey, 1)">+</button>
+        {{ product.name }}
+        <span>
+            Line total:
+        </span>
+      </li>
+
+    </ul>
+
+  </div>
+</div>
