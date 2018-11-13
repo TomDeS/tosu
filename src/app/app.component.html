@@ -1,16 +1,20 @@
-<h1>tosu<span class="small">.be</span></h1>
+<header>
+    <h1>tosu<span class="small">.be</span></h1>
+    <nav>
+        <a routerLink="/home">Home</a>
+        <a routerLink="/tools">Tools</a>
+        <a routerLink="/fries">Fries</a>
+    </nav>
+</header>
 
-<app-product-list></app-product-list>
+<router-outlet></router-outlet>
 
-<app-player></app-player>
-
-<app-bankaccount></app-bankaccount>
-
-<div class="card">
+<footer class="card">
     <p>
         <small>
-            Published under the <a href="https://raw.githubusercontent.com/TomDeS/tosu/master/license" target="_blank">GNU General Public License v3.0</a>.
+            Published under the <a href="https://raw.githubusercontent.com/TomDeS/tosu/master/license" target="_blank">GNU
+                General Public License v3.0</a>.
             This website uses cookies.
         </small>
     </p>
-</div>
+</footer>
