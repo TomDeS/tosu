@@ -135,8 +135,9 @@ button.close {
     border-radius: 5px;
     box-shadow: 0 1px 3px 0 rgba(38,41,58,.06);
     background: #fff;
-    padding: 1.5rem;
+    padding:1.5rem;
     margin-top: 1rem;
+    min-width: 45%;
 }
 ul{
     padding-left: 0;
@@ -153,4 +154,19 @@ li {
 }
 .disclaimer a, a:visited, a:active{
     color: #007bff;
+}
+
+
+.navigation {
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  .navigation li:first-child {
+    margin-right: auto;
+  }
+  .navigation a {
+    color: #007bff;
+    padding: 0 1rem;
+    text-decoration: none;
 }

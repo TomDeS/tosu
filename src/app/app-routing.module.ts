@@ -6,9 +6,9 @@ import { PlayerComponent } from './components/player/player.component';
 import { ProductListComponent } from './components/shop/product-list/product-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', component: PlayerComponent, pathMatch: 'full' },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'fries', component: ProductListComponent },
-  { path: 'home', component: PlayerComponent },
   { path: 'tools', component: BankaccountComponent },
 ];
 
