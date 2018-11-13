@@ -1,16 +1,26 @@
-<h1>tosu<span class="small">.be</span></h1>
+<header>
+    <nav class="card">
+        <ul class="navigation">
+            <li>
+                <a routerLink="/home" class="logo">
+                    tosu.be
+                </a>
+            </li>
+            <li><a routerLink="/home">Home</a></li>
+            <li><a routerLink="/tools">Tools</a></li>
+            <li><a routerLink="/fries">Fries</a></li>
+        </ul>
+    </nav>
+</header>
 
-<app-product-list></app-product-list>
+<router-outlet></router-outlet>
 
-<app-player></app-player>
-
-<app-bankaccount></app-bankaccount>
-
-<div class="card">
+<footer class="card">
     <p>
         <small>
-            Published under the <a href="https://raw.githubusercontent.com/TomDeS/tosu/master/license" target="_blank">GNU General Public License v3.0</a>.
-            This website uses cookies.
+            Published under the <a href="https://raw.githubusercontent.com/TomDeS/tosu/master/license" target="_blank">GNU
+                General Public License v3.0</a>.
+            This website uses cookies. And electricity.
         </small>
     </p>
-</div>
+</footer>

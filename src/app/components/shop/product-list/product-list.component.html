@@ -1,6 +1,6 @@
-<div class="card" style="display: flex; justify-content: space-around">
+<div style="display: flex; justify-content: space-around">
 
-  <div>
+  <div class="card">
 
     <h3>Foodz</h3>
     <ul *ngFor="let product of products; let i = index;">
@@ -13,20 +13,71 @@
     </ul>
   </div>
 
-  <div>
+  <div class="card">
     <h3>Basket</h3>
-    <ul *ngFor="let product of basket; let i = index;">
 
+    <form [formGroup]="basketForm">
+
+      <input type="text" placeholder="name" formControlName="name">
+
+      <div formArrayName="additionalProducts">
+
+        <p *ngFor="let additionalProduct of additionalProductsForm.controls; let i=index" [formGroupName]="i">
+
+          <input type="number" placeholder="quantity" min="0" max="10" step="1" formControlName="quantity">
+          <input type="text" placeholder="Product name" formControlName="productName">
+
+          <button type="button" class="close" aria-label="Close" (click)='deleteAdditionalProduct()'>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </p>
+
+      </div>
+
+      <button (click)="addAdditionalProduct()">Add new Product</button>
+
+      <p>
+        Value: {{ basketForm.value | json }}
+      </p>
+    </form>
+
+    <!--
+    <div [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+
+      <label>
+        Name:
+        <input type="text" formControlName="name">
+      </label>
+
+      <label>
+        Notes:
+        <input type="text" formControlName="notes">
+      </label>
+
+      <div formArrayName="order">
+        <button (click)="addAlias()">Add Alias</button>
+
+
+        <div *ngFor="let address of aliases.controls; let i=index">
+          <label>
+            Alias:
+            <input type="text" [formControlName]="i">
+          </label>
+
+          <button type="submit">Submit</button>
+        </div>
+      </div>
+    -->
+    <ul *ngFor="let product of basket; let i = index;">
       <li>
         <button (click)="updateQuantity(product.$productKey, -1)">-</button>
         {{product.quantity}}
         <button (click)="updateQuantity(product.$productKey, 1)">+</button>
         {{ product.name }}
         <span>
-            Line total:
+          Line total:
         </span>
       </li>
-
     </ul>
 
   </div>
