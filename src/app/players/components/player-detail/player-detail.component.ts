@@ -3,17 +3,18 @@ import { Component, OnInit } from '@angular/core';
 
 
 // Services
-import { Player } from '../../interfaces/player.interface';
-import { PlayerService } from '../../services/player.service';
+import { Player } from '../../models/player.interface';
+import { PlayerService } from '../../player.service';
 
 
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.component.html',
+  selector: 'app-player-detail',
+  templateUrl: './player-detail.component.html',
   styles: []
 })
-export class PlayerComponent implements OnInit {
+
+export class PlayerDetailComponent implements OnInit {
 
 
   players: Player[];
@@ -58,7 +59,7 @@ export class PlayerComponent implements OnInit {
   ngOnInit() {
     this.getDefaultPlayers();
     // this.getHistory(); @TODO implement history based on local storage
-    this.winners = this.playerService.getWinners();
+    // this.winners = this.playerService.getWinners();
   }
 
 

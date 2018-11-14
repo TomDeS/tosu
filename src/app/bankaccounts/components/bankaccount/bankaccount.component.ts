@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TosuService } from '../../services/tosu.service';
-import { BankService } from '../../services/bank.service';
+import { TosuService } from '../../../tosu.service';
+import { BankaccountService } from '../../bankaccount.service';
 
 
 @Component({
@@ -13,12 +13,13 @@ import { BankService } from '../../services/bank.service';
   `,
   styles: []
 })
+
 export class BankaccountComponent implements OnInit {
 
-  constructor(private tosuService: TosuService, private bankService: BankService) { }
+  constructor(private tosuService: TosuService, private bankaccountService: BankaccountService) { }
 
   ngOnInit() {
-    document.getElementById('nl-account').innerText = this.bankService.generateDutchAccount('NL');
+    document.getElementById('nl-account').innerText = this.bankaccountService.generateDutchAccount('NL');
   }
 
 }

@@ -4,14 +4,12 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 
-import { Product } from '../../../interfaces/shop/product';
-import { Basket } from '../../../interfaces/shop/basket';
-import { ShopService } from '../../../services/shop.service';
+import { Product } from '../../models/product';
+import { Basket } from '../../models/basket';
+import { ShopService } from '../../shop.service';
 
 @Component({
   selector: 'app-product-list',
@@ -24,11 +22,8 @@ export class ProductListComponent implements OnInit {
   basket: Basket[] = [];
   basketForm: FormGroup;
 
-  items: Observable<any[]>;
 
-  constructor(private shopService: ShopService, private fb: FormBuilder, db: AngularFirestore) {
-    this.items = db.collection('items').valueChanges();
-  }
+  constructor(private shopService: ShopService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.products = this.shopService.getProducts();
@@ -38,26 +33,26 @@ export class ProductListComponent implements OnInit {
       additionalProducts: this.fb.array([]),
       standardProducts: '',
       timestamp: '',
-    })
+    });
 
   }
 
 
   get additionalProductsForm() {
-    return this.basketForm.get('additionalProducts') as FormArray
+    return this.basketForm.get('additionalProducts') as FormArray;
   }
 
   addAdditionalProduct() {
     const additionalProduct = this.fb.group({
       quantity: [],
       productName: [],
-    })
+    });
 
     this.additionalProductsForm.push(additionalProduct);
   }
 
   deleteAdditionalProduct(i) {
-    this.additionalProductsForm.removeAt(i)
+    this.additionalProductsForm.removeAt(i);
   }
 
 
