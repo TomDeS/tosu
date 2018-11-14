@@ -1,9 +1,9 @@
-html{
+html {
     background-color: #f6f9fa;
 }
 
-body{
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     font-size: 1rem;
     line-height: 1.5;
     color: #212529;
@@ -11,25 +11,26 @@ body{
     margin: 0 auto;
 }
 
-h1{
+h1 {
     font-size: 4rem;
     margin-bottom: .3em;
     font-weight: 300;
     line-height: 1.2;
     margin: 0;
-    .small{
+    .small {
         font-size: 2rem;
     }
 }
 
-a{
+a {
     color: #007bff;
 }
 
-input{
+input {
     border: 0 0 1px 0;
 }
-.btn{
+
+.btn {
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -44,38 +45,63 @@ input{
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    margin: 0 0.5rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin: 0.5rem;
+    &:hover {
+        cursor: pointer;
+    }
 }
+
 .btn-outline-primary {
     color: #007bff;
     background-color: transparent;
     background-image: none;
     border-color: #007bff;
 }
+
 .btn-outline-primary:hover {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
     cursor: pointer;
 }
+
 .btn-outline-success {
     color: #28a745;
     background-color: transparent;
     background-image: none;
     border-color: #28a745;
 }
+
 .btn-outline-success:hover {
     color: #fff;
     background-color: #28a745;
     border-color: #28a745;
     cursor: pointer;
 }
+
 .btn:focus {
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
 }
-input{
+
+.btn-number {
+    padding: 0.25rem 0.75rem;
+    background-color: transparent;
+    border: 1px solid #007bff;
+    &:hover {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        cursor: pointer;
+    }
+}
+
+.no-margin-left {
+    margin-left: 0;
+}
+
+input {
     display: inline-block;
     height: auto;
     padding: .375rem .75rem;
@@ -86,8 +112,9 @@ input{
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
 .progress {
     display: flex;
     height: 1.5rem;
@@ -96,6 +123,7 @@ input{
     background-color: #e9ecef;
     border-radius: .25rem;
 }
+
 .progress-bar {
     display: -ms-flexbox;
     display: flex;
@@ -109,6 +137,7 @@ input{
     background-color: #007bff;
     transition: width .6s ease;
 }
+
 .close {
     float: right;
     font-size: 1.5rem;
@@ -118,6 +147,7 @@ input{
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
 }
+
 button.close {
     padding: 0;
     background-color: transparent;
@@ -125,48 +155,75 @@ button.close {
     -webkit-appearance: none;
     cursor: pointer;
 }
-.close:hover{
+
+.close:hover {
     color: #dc3545;
     text-decoration: none;
     opacity: .75;
 }
-.card{
-    border: 1px solid rgba(38,41,58,.1);
+
+.card {
+    border: 1px solid rgba(38, 41, 58, .1);
     border-radius: 5px;
-    box-shadow: 0 1px 3px 0 rgba(38,41,58,.06);
+    box-shadow: 0 1px 3px 0 rgba(38, 41, 58, .06);
     background: #fff;
-    padding:1.5rem;
+    padding: 1.5rem;
     margin-top: 1rem;
     min-width: 45%;
 }
-ul{
+
+ul {
     padding-left: 0;
 }
+
 li {
     list-style: none;
     margin-top: 0.5rem;
 }
-.disclaimer{
+
+.disclaimer {
     margin-top: 2rem;
     font-size: 0.735rem;
     text-align: center;
-    color: rgba(38,41,58,.6);
-}
-.disclaimer a, a:visited, a:active{
-    color: #007bff;
+    color: rgba(38, 41, 58, .6);
 }
 
+.disclaimer a,
+a:visited,
+a:active {
+    color: #007bff;
+}
 
 .navigation {
     display: -webkit-flex;
     display: flex;
-  }
+}
 
-  .navigation li:first-child {
+.navigation li:first-child {
     margin-right: auto;
-  }
-  .navigation a {
+}
+
+.navigation a {
     color: #007bff;
     padding: 0 1rem;
     text-decoration: none;
+}
+
+.list-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.list-group-item {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    margin-top: 0;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
 }
