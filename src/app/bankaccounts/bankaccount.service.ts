@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { TosuService } from '../services/tosu.service';
+import { TosuService } from '../tosu.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class BankService {
+export class BankaccountService {
 
   generateDutchAccount(countryCode: string) {
 
@@ -31,7 +31,16 @@ export class BankService {
 
   getRandomBankIdentification(country: string) {
     // Array source: https://www.betaalvereniging.nl/en/focus/giro-based-and-online-payments/bank-identifier-code-bic-for-sepa-transactions/
-    const dutchBIC: string[] = ['AABN', 'ABNA', 'ADYB', 'AEGO', 'ANDL', 'ARBN', 'ARSN', 'ASNB', 'ATBA', 'BCDM', 'BCIT', 'BICK', 'BINK', 'BKCH', 'BKMG', 'BLGW', 'BMEU', 'BNDA', 'BNGH', 'BNPA', 'BOFA', 'BOFS', 'BOTK', 'BUNQ', 'CHAS', 'CITC', 'CITI', 'COBA', 'DEUT', 'DHBN', 'DLBK', 'DNIB', 'EBUR', 'FBHL', 'FLOR', 'FRGH', 'FRNX', 'FTSB', 'FVLB', 'GILL', 'HAND', 'HHBA', 'HSBC', 'ICBK', 'INGB', 'ISAE', 'ISBK', 'KABA', 'KASA', 'KNAB', 'KOEX', 'KRED', 'LOCY', 'LOYD', 'LPLN', 'MHCB', 'MOYO', 'NNBA', 'NWAB', 'PCBC', 'RABO', 'RBRB', 'SNSB', 'SOGE', 'TEBU', 'TRIO', 'UBSW', 'UGBI', 'VOWA', 'ZWLB'];
+    const dutchBIC: string[] = ['AABN', 'ABNA', 'ADYB', 'AEGO', 'ANDL', 'ARBN',
+      'ARSN', 'ASNB', 'ATBA', 'BCDM', 'BCIT', 'BICK', 'BINK', 'BKCH',
+      'BKMG', 'BLGW', 'BMEU', 'BNDA', 'BNGH', 'BNPA', 'BOFA', 'BOFS',
+      'BOTK', 'BUNQ', 'CHAS', 'CITC', 'CITI', 'COBA', 'DEUT', 'DHBN',
+      'DLBK', 'DNIB', 'EBUR', 'FBHL', 'FLOR', 'FRGH', 'FRNX', 'FTSB',
+      'FVLB', 'GILL', 'HAND', 'HHBA', 'HSBC', 'ICBK', 'INGB', 'ISAE',
+      'ISBK', 'KABA', 'KASA', 'KNAB', 'KOEX', 'KRED', 'LOCY', 'LOYD',
+      'LPLN', 'MHCB', 'MOYO', 'NNBA', 'NWAB', 'PCBC', 'RABO', 'RBRB',
+      'SNSB', 'SOGE', 'TEBU', 'TRIO', 'UBSW', 'UGBI', 'VOWA', 'ZWLB'];
+
     const bic: string = dutchBIC[this.tosuService.getRandomNumber(0, dutchBIC.length - 1)];
     const bicValue: string = this.getLetterValue(bic);
 
@@ -41,9 +50,9 @@ export class BankService {
 
   getNumbers(count: number) {
     let i, j, k, p1, p2: number;
-    let digits: number[] = [];
-    let pass11: boolean = false;
-    const maxDigit: number = 9;
+    const digits: number[] = [];
+    let pass11 = false;
+    const maxDigit = 9;
 
 
     // get {count} random base 10 numbers
@@ -88,8 +97,8 @@ export class BankService {
 
 
   getLetterValue(letters: string) {
-    let i: number = 0;
-    let letterValue: string = '';
+    let i = 0;
+    let letterValue = '';
 
 
     for (i = 0; i < letters.length; i++) {
@@ -101,9 +110,9 @@ export class BankService {
   }
 
   perform11test(nr: number[]) {
-    let sum: number = 0;
-    let j: number = 0;
-    let i: number = 0;
+    let sum = 0;
+    let j = 0;
+    let i = 0;
 
     for (i = 10; i >= 1; i--) {
       sum += nr[j] * i;
@@ -124,13 +133,15 @@ export class BankService {
 
 
     /*
-    Piece-wise calculation D mod 97 can be done in many ways. One such way is as follows:			
-        1. Starting from the leftmost digit of D, construct a number using the first 9 digits and call it N.			
-        2. Calculate N mod 97.			
-        3. Construct a new 9-digit N by concatenating above result (step 2) with the next 7 digits of D. If there are fewer than 7 digits remaining in D but at least one, then construct a new N, which will have less than 9 digits, from the above result (step 2) followed by the remaining digits of D			
-        4. Repeat steps 2–3 until all the digits of D have been processed			
-        The result of the final calculation in step 2 will be D mod 97 = N mod 97.			
-        5. Calculate 98 - final result			
+    Piece-wise calculation D mod 97 can be done in many ways. One such way is as follows:
+        1. Starting from the leftmost digit of D, construct a number using the first 9 digits and call it N.
+        2. Calculate N mod 97.
+        3. Construct a new 9-digit N by concatenating above result (step 2) with the next 7 digits of D.
+        If there are fewer than 7 digits remaining in D but at least one, then construct a new N, which
+        will have less than 9 digits, from the above result (step 2) followed by the remaining digits of D
+        4. Repeat steps 2–3 until all the digits of D have been processed
+        The result of the final calculation in step 2 will be D mod 97 = N mod 97.
+        5. Calculate 98 - final result
     */
 
     let accString = checkCombination;

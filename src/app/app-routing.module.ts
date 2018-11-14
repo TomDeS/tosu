@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BankaccountComponent } from './components/bankaccount/bankaccount.component';
-import { PlayerComponent } from './components/player/player.component';
-import { ProductListComponent } from './components/shop/product-list/product-list.component';
+import { BankaccountComponent } from './bankaccounts/components/bankaccount/bankaccount.component';
+import { PlayerDetailComponent } from './players/components/player-detail/player-detail.component';
+import { ProductListComponent } from './shop/components/product-list/product-list.component';
 
 const routes: Routes = [
-  { path: '', component: PlayerComponent, pathMatch: 'full' },
+  { path: '', component: PlayerDetailComponent, pathMatch: 'full' },
   { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'fries', component: ProductListComponent },
-  { path: 'tools', component: BankaccountComponent },
+  { path: 'bankaccount', component: BankaccountComponent },
 ];
 
 @NgModule({

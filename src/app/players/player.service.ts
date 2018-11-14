@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { Player } from '../interfaces/player.interface';
-import { PLAYERS } from '../data/default-players';
-import { TosuService } from '../services/tosu.service';
+import { Player } from './models/player.interface';
+import { PLAYERS } from './data/default-players';
+import { TosuService } from '../tosu.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class PlayerService {
+  winner: Player[] = [];
 
   getDefaultPlayers(): Player[] {
     const local = this.checkLocalStorage();
@@ -29,7 +31,6 @@ export class PlayerService {
 
   }
 
-  winner: Player[] = [];
 
   updateLocalStorage(playerHistory: Player[]) {
 
@@ -37,7 +38,7 @@ export class PlayerService {
     localStorage.setItem('players', JSON.stringify(playerHistory));
 
     // Get winner of this round
-    var max = playerHistory.reduce(function (prev, current) {
+    const max = playerHistory.reduce(function (prev, current) {
       if (+current.score > +prev.score) {
         return current;
       } else {
@@ -64,10 +65,10 @@ export class PlayerService {
 
 
   assignRandomValues(players: Player[], nrPlayers: number, unit: string, className: string, minScore: number, maxScore: number) {
-    let numbers = [];
+    const numbers = [];
     let unique = [];
-    let playerHistory: Player[] = [];
-    let check = [];
+    const playerHistory: Player[] = [];
+    const check = [];
 
     for (; unique.length < nrPlayers;) {
       numbers.push(this.tosuService.getRandomNumber(minScore, maxScore));
@@ -101,5 +102,5 @@ export class PlayerService {
   }
 
   constructor(private tosuService: TosuService) { }
-  
+
 }
