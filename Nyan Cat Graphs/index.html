@@ -1,0 +1,93 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+<button id="soundButton"><img src="img/nosound.png" width="40"></button>
+  <div class="container"> 
+    <p id="wie">Wie gaat er om frieten?</p>
+    <!-- The following code is for nyancat chart -->
+    <div class="chartContainer">
+      <canvas id="nyancat"  height="500px"></canvas>
+    </div>
+
+    <!-- the next code is just for the stars, so feel free to ignore -->
+    <div class="star starMovement1">
+      <div number="1"></div>
+      <div number="2"></div>
+      <div number="3"></div>
+      <div number="4"></div>
+      <div number="5"></div>
+      <div number="6"></div>
+      <div number="7"></div>
+      <div number="8"></div>
+    </div>
+    <div class="star starMovement2 backwards">
+      <div number="1"></div>
+      <div number="2"></div>
+      <div number="3"></div>
+      <div number="4"></div>
+      <div number="5"></div>
+      <div number="6"></div>
+      <div number="7"></div>
+      <div number="8"></div>
+    </div>
+    <div class="star starMovement3">
+      <div number="1"></div>
+      <div number="2"></div>
+      <div number="3"></div>
+      <div number="4"></div>
+      <div number="5"></div>
+      <div number="6"></div>
+      <div number="7"></div>
+      <div number="8"></div>
+    </div>
+    <div class="star starMovement4">
+      <div number="1"></div>
+      <div number="2"></div>
+      <div number="3"></div>
+      <div number="4"></div>
+      <div number="5"></div>
+      <div number="6"></div>
+      <div number="7"></div>
+      <div number="8"></div>
+    </div>
+    <div class="star starMovement5">
+      <div number="1"></div>
+      <div number="2"></div>
+      <div number="3"></div>
+      <div number="4"></div>
+      <div number="5"></div>
+      <div number="6"></div>
+      <div number="7"></div>
+      <div number="8"></div>
+    </div>
+  </div>
+  
+  <iframe id="nyanSoundChrome" src="audio/nyan-cat.mp3" allow="autoplay" style="display:none">
+  </iframe> 
+  
+  <audio id="nyanSound" autoplay="true" loop="true">
+		<source src="audio/nyan-cat.ogg" type="audio/ogg" />
+		<source src="audio/nyan-cat.mp3" type="audio/mpeg" />
+	</audio>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
