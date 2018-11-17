@@ -1,13 +1,15 @@
-<div style="display: flex; justify-content: space-around">
+<div style="display: flex; justify-content: space-between">
 
   <div class="card">
 
     <h3>Foodz</h3>
-    <ul *ngFor="let product of products; let i = index;">
+    <ul class="list-group">
 
-      <li>
+      <li class="list-group-item" *ngFor="let product of products; let i = index;">
+        {{ product.category }}:
         {{ product.name }}
-        <button (click)="addToCart(product.$key,i)">{{ product.price | currency:'EUR'}} | +</button>
+        <button (click)="addToCart(product.$key,i)" class="btn btn-outline-primary">{{ product.price | currency:'EUR'}}
+          | +</button>
       </li>
 
     </ul>
@@ -15,10 +17,20 @@
 
   <div class="card">
     <h3>Basket</h3>
+    <ul>
+      <li *ngFor="let product of basket; let i = index;">
+        <button (click)="updateQuantity(product.$productKey, -1)" class="btn btn-number">&#8722;</button>
+        <span class="number">
+          {{product.quantity}}
+        </span>
+        <button (click)="updateQuantity(product.$productKey, 1)" class="btn btn-number">&#43;</button>
+        {{ product.name }}
+      </li>
+    </ul>
 
     <form [formGroup]="basketForm">
 
-      <input type="text" placeholder="name" formControlName="name">
+      <input type="text" placeholder="your name" formControlName="name">
 
       <div formArrayName="additionalProducts">
 
@@ -34,26 +46,15 @@
 
       </div>
 
-      <button (click)="addAdditionalProduct()">Add new Product</button>
+      <button (click)="addAdditionalProduct()" class="btn btn-outline-primary no-margin-left">Add new Product</button>
       <!--
       <p>
         Value: {{ basketForm.value | json }}
       </p>
       -->
+      <br />
+      <button type="submit" disabled class="btn btn-outline-primary no-margin-left">Submit</button>
     </form>
-
-
-    <ul *ngFor="let product of basket; let i = index;">
-      <li>
-        <button (click)="updateQuantity(product.$productKey, -1)">-</button>
-        {{product.quantity}}
-        <button (click)="updateQuantity(product.$productKey, 1)">+</button>
-        {{ product.name }}
-        <span>
-          Line total:
-        </span>
-      </li>
-    </ul>
 
   </div>
 </div>

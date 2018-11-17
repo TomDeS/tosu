@@ -1,0 +1,13 @@
+<div class="card">
+    <input #newPlayer (keyup.enter)="addPlayer(newPlayer.value)" (blur)="addPlayer(newPlayer.value); newPlayer.value='' ">
+    <button (click)="addPlayer(newPlayer.value)" class="btn btn-outline-primary">Add</button>
+    <button (click)="startRandom()" class="btn btn-outline-success">start</button>
+
+    <app-player-nyan>
+
+    </app-player-nyan>
+
+    <app-player-detail>
+    </app-player-detail>
+
+</div>
