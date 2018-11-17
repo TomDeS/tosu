@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+html{
+      overflow-x: hidden;
+	}
+
+/*this is the only CSS needed for the chart*/
+.chartContainer {
+  padding: 50px;
+}
+body{
+  background-color:#303F9F;
+  padding:20px
+}
+
+/*this is the basic css for the background*/
+
+.container{
+  background-color: #303F9F;
+}
+
+p{
+  color:#fff;
+  text-align:center;
+  font-family:'Press Start 2P';
+  padding-top:50px;
+}
+
+
+
+/* The following CSS is for the animated stars, so feel free to ignore 
+Cradits: https://github.com/michalbe/css-nyan-cat
+*/
+@-moz-keyframes star1 {
+    0% { top: 0; height: 5px;}
+    33.19% { top: 0; height: 5px; }
+    33.2% { height:10px; top:0; }
+    49.79% { height:10px; top:0; }
+    49.8% { height:10px; top:5px; }
+    66.39% {height:10px; top:5px; }
+    66.4% { height:5px; top:10px;}
+    82.99% { height:5px; top:10px;}
+    83% { height: 5px; top: 15px; }
+    99.99% { height: 5px; top: 15px; }
+    100% { top: 0; height: 5px; }
+}
+
+@-webkit-keyframes star1{
+    0% { top: 0; height: 5px;}
+    33.19% { top: 0; height: 5px; }
+    33.2% { height:10px; top:0; }
+    49.79% { height:10px; top:0; }
+    49.8% { height:10px; top:5px; }
+    66.39% {height:10px; top:5px; }
+    66.4% { height:5px; top:10px;}
+    82.99% { height:5px; top:10px;}
+    83% { height: 5px; top: 15px; }
+    99.99% { height: 5px; top: 15px; }
+    100% { top: 0; height: 5px; }
+}
+
+@-moz-keyframes star2-3-6-7 {
+    0% { visibility: hidden; }
+    16.59% { visibility: hidden; }
+    16.6% { visibility: visible; }
+    33.19% { visibility: visible; }
+    33.2% { visibility: hidden; }
+    100% { visibility: hidden; }
+}
+
+@-webkit-keyframes star2-3-6-7{
+    0% { visibility: hidden; }
+    16.59% { visibility: hidden; }
+    16.6% { visibility: visible; }
+    33.19% { visibility: visible; }
+    33.2% { visibility: hidden; }
+    100% { visibility: hidden; }
+}
+
+@-moz-keyframes star4 {
+    0% { left: 0; width: 5px; visibility: visible;}
+    33.19% { left: 0; width: 5px; }
+    33.2% { width:10px; left:0; }
+    49.79% { width:10px; left:0; }
+    49.8% { width:10px; left:5px; }
+    66.39% {width:10px; left:5px; }
+    66.4% { width:5px; left:10px;}
+    82.99% { width:5px; left:10px;}
+    83% { width: 5px; left: 15px; visibility:hidden;}
+    99.99% { width: 5px; left: 15px; visibility:hidden;}
+    100% { left: 0; width: 5px; visibility:hidden;}
+}
+
+@-webkit-keyframes star4 {
+    0% { left: 0; width: 5px; visibility: visible;}
+    33.19% { left: 0; width: 5px; }
+    33.2% { width:10px; left:0; }
+    49.79% { width:10px; left:0; }
+    49.8% { width:10px; left:5px; }
+    66.39% {width:10px; left:5px; }
+    66.4% { width:5px; left:10px;}
+    82.99% { width:5px; left:10px;}
+    83% { width: 5px; left: 15px; visibility:hidden;}
+    99.99% { width: 5px; left: 15px; visibility:hidden;}
+    100% { left: 0; width: 5px; visibility:hidden;}
+}
+
+@-moz-keyframes star5 {
+    0% { left: 38px; width: 5px; visibility: visible;}
+    33.19% { left: 38px; width: 5px; }
+    33.2% { width:10px; left:33px; }
+    49.79% { width:10px; left:33px; }
+    49.8% { width:10px; left:28px; }
+    66.39% {width:10px; left:28px; }
+    66.4% { width:5px; left:28px;}
+    82.99% { width:5px; left:28px;}
+    83% { width: 5px; left: 15px; visibility:hidden;}
+    99.99% { width: 5px; left: 15px; visibility:hidden;}
+    100% { left: 0; width: 5px; visibility:hidden;}
+}
+
+@-webkit-keyframes star5 {
+    0% { left: 38px; width: 5px; visibility: visible;}
+    33.19% { left: 38px; width: 5px; }
+    33.2% { width:10px; left:33px; }
+    49.79% { width:10px; left:33px; }
+    49.8% { width:10px; left:28px; }
+    66.39% {width:10px; left:28px; }
+    66.4% { width:5px; left:28px;}
+    82.99% { width:5px; left:28px;}
+    83% { width: 5px; left: 15px; visibility:hidden;}
+    99.99% { width: 5px; left: 15px; visibility:hidden;}
+    100% { left: 0; width: 5px; visibility:hidden;}
+}
+
+@-moz-keyframes star8 {
+    0% { top: 32px; height: 5px; visibility:visible;}
+    33.19% { top: 32px; height: 5px; }
+    33.2% { height:10px; top:28px; }
+    49.79% { height:10px; top:28px; }
+    49.8% { height:10px; top:23px; }
+    66.39% {height:10px; top:23px; }
+    66.4% { height:5px; top:18px;}
+    82.99% { height:5px; top:18px;}
+    83% { height: 5px; top: 15px; visibility:hidden;}
+    99.99% { height: 5px; top: 15px; visibility:hidden;}
+    100% { top: 0; height: 5px; visibility:hidden;}
+}
+
+@-webkit-keyframes star8 {
+    0% { top: 32px; height: 5px; visibility:visible;}
+    33.19% { top: 32px; height: 5px; }
+    33.2% { height:10px; top:28px; }
+    49.79% { height:10px; top:28px; }
+    49.8% { height:10px; top:23px; }
+    66.39% {height:10px; top:23px; }
+    66.4% { height:5px; top:18px;}
+    82.99% { height:5px; top:18px;}
+    83% { height: 5px; top: 15px; visibility:hidden;}
+    99.99% { height: 5px; top: 15px; visibility:hidden;}
+    100% { top: 0; height: 5px; visibility:hidden;}
+}
+
+
+.star {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index:1;
+    
+}
+
+.star div {
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+    position: absolute;
+    -moz-animation: star1 0.4s linear 0s infinite;
+    -webkit-animation: star1 0.4s linear 0s infinite;
+}
+
+.star div[number="1"] {
+    left: 18px;
+    top: 0;
+}
+
+.star div[number="2"] {
+    left: 8px;
+    top: 6px;
+    visibility: hidden;
+    -moz-animation-name: star2-3-6-7;
+    -webkit-animation-name: star2-3-6-7;
+}
+
+.star div[number="3"] {
+    left: 30px;
+    top: 6px;
+    visibility: hidden;
+    -moz-animation-name: star2-3-6-7;
+    -webkit-animation-name: star2-3-6-7;
+}
+
+.star div[number="4"] {
+    left: 0px;
+    top: 16px;
+    -moz-animation-name: star4;
+    -webkit-animation-name: star4;
+}
+
+.star div[number="5"] {
+    left: 38px;
+    top: 16px;
+    -moz-animation-name: star5;
+    -webkit-animation-name: star5;
+}
+
+.star div[number="6"] {
+    left: 8px;
+    top: 26px;
+    visibility: hidden;
+    -moz-animation-name: star2-3-6-7;
+    -webkit-animation-name: star2-3-6-7;
+}
+
+.star div[number="7"] {
+    left: 30px;
+    top: 26px;
+    visibility: hidden;
+    -moz-animation-name: star2-3-6-7;
+    -webkit-animation-name: star2-3-6-7;
+}
+
+.star div[number="8"] {
+    left: 18px;
+    top: 32px;
+    -moz-animation-name: star8;
+    -webkit-animation-name: star8;
+}
+
+@-moz-keyframes starMovement1 {
+    0% { top: 80px; left: 600px}
+    100% { top: 80px; left: 0px;}
+}
+
+@-webkit-keyframes starMovement1 {
+    0% { top: 80px; left: 600px}
+    100% { top: 80px; left: 0px;}
+}
+
+.starMovement1 {
+    -moz-animation: starMovement1 3s linear 0s infinite;
+    -webkit-animation: starMovement1 3s linear 0s infinite;
+}
+
+@-moz-keyframes starMovement2 {
+    0% { top: -10px; left: 800px}
+    100% { top: -10px; left: -100px;}
+}
+
+@-webkit-keyframes starMovement2{
+    0% { top: -10px; left: 800px}
+    100% { top: -10px; left: -100px;}
+}
+
+.starMovement2 {
+    -moz-animation: starMovement2 4.5s linear 0s infinite;
+    -webkit-animation: starMovement2 4.5s linear 0s infinite;
+}
+
+@-moz-keyframes starMovement3 {
+    0% { top: 270px; left: 728px}
+    100% { top: 270px; left: -172px;}
+}
+
+@-webkit-keyframes starMovement3 {
+    0% { top: 270px; left: 728px}
+    100% { top: 270px; left: -172px;}
+}
+
+.starMovement3 {
+    -moz-animation: starMovement3 4.5s linear 0s infinite;
+    -webkit-animation: starMovement3 4.5s linear 0s infinite;
+}
+
+@-moz-keyframes starMovement4 {
+    0% { top: 160px; left: 2300px}
+    100% { top: 160px; left: -100px;}
+}
+
+@-webkit-keyframes starMovement4 {
+    0% { top: 160px; left: 2300px}
+    100% { top: 160px; left: -100px;}
+}
+
+.starMovement4 {
+    -moz-animation: starMovement4 12s linear 0s infinite;
+    -webkit-animation: starMovement4 12s linear 0s infinite;
+}
+
+@-moz-keyframes starMovement5 {
+    0% { top: 130px; left: 1100px}
+    100% { top: 130px; left: -100px;}
+}
+
+@-webkit-keyframes starMovement5 {
+    0% { top: 130px; left: 1100px}
+    100% { top: 130px; left: -100px;}
+}
+
+.starMovement5 {
+    -moz-animation: starMovement5 6s linear 0s infinite;
+    -webkit-animation: starMovement5 6s linear 0s infinite;
+}
