@@ -1,9 +1,3 @@
-<div class="card">
-  <input #newPlayer (keyup.enter)="addPlayer(newPlayer.value)" (blur)="addPlayer(newPlayer.value); newPlayer.value='' ">
-  <button (click)="addPlayer(newPlayer.value)" class="btn btn-outline-primary">Add</button>
-  <button (click)="startRandom()" class="btn btn-outline-success">start</button>
-
-
   <ul>
     <li *ngFor="let player of players; let i = index;">
       <button type="button" class="close" aria-label="Close" (click)='onSelect(i)'>
@@ -29,4 +23,3 @@
 
   <p id="history">
   </p>
-</div>
