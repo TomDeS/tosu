@@ -104,17 +104,6 @@ function createGraph(names) {
 		datasets: listOfDataSets
 	  },
 	  options: {
-		showAllTooltips: true,
-		tooltips: {
-				callbacks: {
-					title: function(tooltipItem, data) {
-						return names[tooltipItem.datasetIndex];
-					},
-					label: function(tooltipItem, data) {
-						return names[tooltipItem.datasetIndex];
-					}
-				}
-			},
 		scaleShowLabels: false,
 		responsive: true,
 		maintainAspectRatio: false,
