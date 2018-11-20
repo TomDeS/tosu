@@ -1,25 +1,10 @@
-  <ul>
-    <li *ngFor="let player of players; let i = index;">
-      <button type="button" class="close" aria-label="Close" (click)='onSelect(i)'>
-        <span aria-hidden="true">&times;</span>
-      </button>
-      {{player.name}}
-      <div class="progress">
-        <div class="progress-bar" id="{{ 'progress-bar' + i }}" role="progressbar" style.width="{{player.score}}%">
-          {{player?.score}} points
-        </div>
+<ul>
+  <li *ngFor="let player of players; let i = index;">
+    {{player.name}}
+    <div class="progress">
+      <div class="progress-bar" id="{{ 'progress-bar' + i }}" role="progressbar" style.width="{{player.score}}%">
+        {{player?.score}} points
       </div>
-    </li>
-  </ul>
-
-
-  <ul>
-    <li *ngFor="let winner of winners; let i = index;">
-      {{winner.timestamp}}
-      {{winner.name}}
-      {{winner.score}}
-    </li>
-  </ul>
-
-  <p id="history">
-  </p>
+    </div>
+  </li>
+</ul>

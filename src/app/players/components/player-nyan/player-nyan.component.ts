@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 
+import { Player } from '../../models/player.interface';
 import { PlayerService } from '../../player.service';
+import { NyanService } from '../../nyan.service';
+
 
 @Component({
   selector: 'app-player-nyan',
@@ -9,26 +12,44 @@ import { PlayerService } from '../../player.service';
   styles: []
 })
 export class PlayerNyanComponent implements OnInit {
+  @Input() players: Player[];
 
   @ViewChild('nyanCanvas') nyanCanvas: ElementRef;
   public context: CanvasRenderingContext2D;
 
 
+  names = [];
+  winner: string;
+
   ngAfterViewInit(): void {
     this.context = (<HTMLCanvasElement>this.nyanCanvas.nativeElement).getContext('2d');
-    
-    this.createGraph(this.names);
+
+    this.createGraph();
   }
 
-  names = ["Player1", "Player2", "Player3", "Player4"];
 
-  constructor(private playerService: PlayerService) { }
+  createGraph() {
+    const playersLength: number = this.names.length;
+    this.nyanService.createGraph(this.names, playersLength, this.context);
+
+
+  }
+
+  getNames(players) {
+    let names = [];
+    for (let i = 0; i < players.length; i++) {
+      names[i] = this.players[i].name;
+    }
+
+    return names;
+  }
+
+  constructor(private playerService: PlayerService, private nyanService: NyanService) {
+  }
 
   ngOnInit() {
+    this.names = this.getNames(this.players);
   }
 
 
-  createGraph(names) {
-    this.playerService.createGraph(names, this.context);
-  }
 }
