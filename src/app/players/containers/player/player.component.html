@@ -1,13 +1,25 @@
 <div class="card">
     <input #newPlayer (keyup.enter)="addPlayer(newPlayer.value)" (blur)="addPlayer(newPlayer.value); newPlayer.value='' ">
     <button (click)="addPlayer(newPlayer.value)" class="btn btn-outline-primary">Add</button>
-    <button (click)="startRandom()" class="btn btn-outline-success">start</button>
+    <button (click)="startRandom(nyanify)" class="btn btn-outline-success">start</button>
+    <label>
+        <input type="checkbox" name="nyanify" [checked]="nyanify" (change)="nyanify = !nyanify">
+        Nyanify?
+    </label>
 
-    <app-player-nyan>
+    <div>
+        <span *ngFor="let player of players; let i = index;">
+            {{player.name}}
+            <button type="button" class="close" aria-label="Close" (click)='removePlayer(i)'>
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </span>
+    </div>
 
+    <app-player-nyan *ngIf="nyanify && playing" [players]="players">
     </app-player-nyan>
 
-    <app-player-detail>
+    <app-player-detail [players]="players" *ngIf="!nyanify && playing">
     </app-player-detail>
 
 </div>
