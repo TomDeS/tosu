@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ProductsComponent } from './components/products/products.component';
+import { BasketComponent } from './components/basket/basket.component';
 
 @NgModule({
   declarations: [
-    ProductListComponent,
-    ShoppingCartComponent
+    ProductsComponent,
+    BasketComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    FormsModule
   ]
 })
 export class ShopModule { }

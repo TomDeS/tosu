@@ -1,16 +1,32 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
-import { PRODUCTS } from './data/default-products';
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ShopService {
 
+  private dbPath = '/';
 
-  getProducts() {
-    return PRODUCTS;
+  webshopRef: AngularFireList<any> = null;
+
+  constructor(private db: AngularFireDatabase) {
+    this.webshopRef = db.list(this.dbPath);
   }
 
-  constructor() { }
+  getAllProducts(): any {
+    return this.db.list('products').valueChanges();
+  }
+
+  getCart(): AngularFireList<any> {
+    return this.db.list('/basket');
+  }
+
+  updateCart(key: string, value: any): any {
+    let self = this;
+    this.db.list('/basket').update(key, value).catch(error => this.handleError(error));
+  }
+
+  private handleError(error) {
+    console.log(error);
+  }
+
 }
