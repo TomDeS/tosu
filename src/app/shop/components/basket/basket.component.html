@@ -1,0 +1,76 @@
+<div *ngFor="let ci of cart">
+  <div *ngIf="ci" class="card">
+    <h2>Your cart</h2>
+    <hr />
+    <form>
+      <div>
+        <label for="exampleInputEmail1">Your Name</label>
+        <input type="text" (change)="updateCartDetails(ci);" name="basketName" [(ngModel)]="ci.basketName">
+      </div>
+      <div>
+        <label for="exampleInputPassword1">Pin</label>
+        <input type="text" (change)="updateCartDetails(ci);" name="pincode" [(ngModel)]="ci.pincode">
+      </div>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price per piece</th>
+          <th>Line Total</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ci.products">
+          <td>{{item.title}}</td>
+          <td>
+            <input type="text" (change)="updateCartDetails(ci);" [(ngModel)]="item.quantity">
+          </td>
+          <td> {{item.price| currency:'EUR'}}</td>
+          <td> {{item.quantity * item.price| currency:'EUR'}}</td>
+          <td><button class="btn" (click)="deleteFromCart(index, ci)"> &times; </button></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td>{{ci.totalQuantity}}</td>
+          <td></td>
+          <td>{{ci.totalAmount| currency:'EUR'}}</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="card" *ngIf="ci">
+    <h2>Add products</h2>
+    <hr />
+    <table>
+      <tr *ngFor="let item of newProducts; index as i">
+        <td>
+          <select class="form-control" (change)="getProductPrice(item, i);" [(ngModel)]="item.title">
+            <option *ngFor="let p of allProducts;" value="{{p.title}}">{{p.title}}</option>
+          </select>
+        </td>
+        <td>
+          <button (click)="item.quantity = item.quantity - 1;" class="btn">-</button>
+          <input type="text" [(ngModel)]="item.quantity">
+
+        </td>
+        <td>
+          <button (click)="removeProduct(i);" class="btn "> Remove</button>
+        </td>
+        <td>
+          <button (click)="addAnother();" class="btn"> Add Another</button>
+        </td>
+      </tr>
+      <tr>
+        <button (click)="addProductstoCart(ci);" class="btn">Update Cart</button>
+      </tr>
+    </table>
+
+  </div>
+</div>
