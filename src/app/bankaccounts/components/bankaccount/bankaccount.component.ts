@@ -9,9 +9,19 @@ import { BankaccountService } from '../../bankaccount.service';
   selector: 'app-bankaccount',
   template: `
     <div class="card">
+    <button (click)="generateAccounts([['Belgian', 'BE'], ['Dutch', 'NL']])" class="btn btn-outline-primary" >
+      Generate another set
+    </button>
+    <button (click)="generateAccounts([['Belgian', 'BE']])" class="btn btn-outline-primary" >
+      Generate Dutch account
+    </button>
+    <button (click)="generateAccounts([['Dutch', 'NL']])" class="btn btn-outline-primary" >
+      Generate Dutch account
+    </button>
+
       <ul>
         <li *ngFor="let account of accounts; let i = index;">
-          Random valid {{account.country}} bank account number: {{account.account}}
+          Random valid {{account.country}} bank account: {{account.account}}
         </li>
       </ul>
     
@@ -29,7 +39,6 @@ export class BankaccountComponent implements OnInit {
   constructor(private tosuService: TosuService, private bankaccountService: BankaccountService) { }
 
   ngOnInit() {
-    //    this.generateAccounts([['Dutch', 'NL', 10, true], ['Belgian', 'BE', 9, false]]);
     this.generateAccounts([['Belgian', 'BE'], ['Dutch', 'NL']]);
   }
 
