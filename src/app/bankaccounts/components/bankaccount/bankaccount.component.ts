@@ -13,7 +13,7 @@ import { BankaccountService } from '../../bankaccount.service';
       Generate another set
     </button>
     <button (click)="generateAccounts([['Belgian', 'BE']])" class="btn btn-outline-primary" >
-      Generate Dutch account
+      Generate Belgian account
     </button>
     <button (click)="generateAccounts([['Dutch', 'NL']])" class="btn btn-outline-primary" >
       Generate Dutch account
