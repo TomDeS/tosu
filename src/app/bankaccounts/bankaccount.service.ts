@@ -9,27 +9,79 @@ import { TosuService } from '../tosu.service';
 
 export class BankaccountService {
 
-  generateDutchAccount(countryCode: string) {
 
-    /*
-      Format: 2L 2N 4L 10N
-      Example: NL12INGB06989972161
+  generateBankAccount(countryCode: string): string {
+    let digits: number = 0;
 
-      @2L: country code, fixed (NL)
-      @2N: check sum, calculated based on 2L4L10N00
-      @4L: Bank identification, 4 letters
-      @10N: 10 random base 10 numbers, should pass eleven test
-    */
 
+    // Get random bank identification code
     const bankIdentification: string[] = this.getRandomBankIdentification(countryCode);
-    const numbers: number[] = this.getNumbers(10);
-    const checkSum: number = this.calculateCheckSum(countryCode, bankIdentification, numbers);
 
-    return countryCode + checkSum + bankIdentification[0] + numbers.join('');
+    // Get digits
+    switch (countryCode) {
+      case 'NL':
+        digits = this.generateDutchDigits();
+        break;
+      case 'BE':
+        digits = this.generateBelgianDigits(bankIdentification);
+        break;
+      default:
+        break;
+    }
+
+    
+    // Calculate the checksum
+    const checkSum: string = this.calculateCheckSum(countryCode, bankIdentification, digits);
+
+
+    // Return bank account number
+    return countryCode + checkSum + bankIdentification[0] + digits;
   }
 
 
-  getRandomBankIdentification(country: string) {
+  generateDutchDigits(): number {
+    /*
+        Format: 2L 2N 4L 10N
+        Example: NL 64 FLOR 6627 0021 83
+        @2L: country code, fixed (NL)
+        @2N: check sum, calculated based on 2L4L10N00
+        @4L: Bank identification, 4 letters
+        @10N: 10 random base 10 digits, should pass eleven test for Dutch bank accounts
+    */
+    const digitsLength = 10;
+    const elevenTest = true;
+
+    // Get digits, but they should pass the eleven test
+    return this.getNumbers(digitsLength, elevenTest);
+  }
+
+
+  generateBelgianDigits(bankIdentification: string[]): number {
+    /**
+      Format: 2L 2N 3N 7N 2N 
+      Example: BE 68 539 0075 470 34
+      @2L: country code, fixed (BE)
+      @2N: check sum, calculated based on 2L4
+      @3N: bank identification
+      @7N: 7 random base 10 digits
+      @2N: check sum for 7 previous digits, remainder of modulo 97 (if 0, checksum is 97)
+    */
+
+    const digitsLength = 7;
+    const elevenTest = false;
+
+    // Get digits, no need to pass the eleven test
+    const numbers = this.getNumbers(digitsLength, elevenTest);
+    
+    // calculate mod 97 of the sub check and add to numbers
+    return this.getModulo(bankIdentification, numbers, digitsLength);
+
+  }
+
+  getRandomBankIdentification(country: string): string[] {
+    let bic: string = '';
+    let bicValue: number = 0;
+
     // Array source: https://www.betaalvereniging.nl/en/focus/giro-based-and-online-payments/bank-identifier-code-bic-for-sepa-transactions/
     const dutchBIC: string[] = ['AABN', 'ABNA', 'ADYB', 'AEGO', 'ANDL', 'ARBN',
       'ARSN', 'ASNB', 'ATBA', 'BCDM', 'BCIT', 'BICK', 'BINK', 'BKCH',
@@ -41,78 +93,148 @@ export class BankaccountService {
       'LPLN', 'MHCB', 'MOYO', 'NNBA', 'NWAB', 'PCBC', 'RABO', 'RBRB',
       'SNSB', 'SOGE', 'TEBU', 'TRIO', 'UBSW', 'UGBI', 'VOWA', 'ZWLB'];
 
-    const bic: string = dutchBIC[this.tosuService.getRandomNumber(0, dutchBIC.length - 1)];
-    const bicValue: string = this.getLetterValue(bic);
+
+    switch (country.toUpperCase()) {
+      case 'NL':
+        bic = dutchBIC[this.tosuService.getRandomNumber(0, dutchBIC.length - 1)];
+        break;
+
+      case 'BE':
+        bicValue = this.tosuService.getRandomNumber(0, 999);
+        bic = bicValue.toString();
+
+        // Format should be NNN
+        if (bic.length == 2) {
+          bic = '0' + bic;
+        } else if (bic.length == 1) {
+          bic = '00' + bic;
+        }
+        break;
+
+      default:
+        bic = 'ERROR'
+    }
 
 
-    return [bic, bicValue];
+    return [bic];
   }
 
-  getNumbers(count: number) {
-    let i, j, k, p1, p2: number;
-    const digits: number[] = [];
-    let pass11 = false;
-    const maxDigit = 9;
+  getNumbers(count: number, elevenTest: boolean): number {
+    let i: number = 0;
+    let j: number = 0;
+    let k: number = 0;
+    let p1: number = 0;
+    let p2: number = 0;
+    let digits: number[] = [];
+    let pass11: boolean = false;
+    const highestDigit: number = 9;
 
 
     // get {count} random base 10 numbers
     for (i = 0; i < count; i++) {
-      digits[i] = this.tosuService.getRandomNumber(0, maxDigit);
+      if (i === 0) {
+        digits[i] = this.tosuService.getRandomNumber(1, highestDigit); // first digit may not be zero
+      } else {
+        digits[i] = this.tosuService.getRandomNumber(0, highestDigit);
+      }
     }
 
+    // If 11-test is applicable, verify generated numbers
+    if (elevenTest) {
+      // check if they pass the 11-test
+      pass11 = this.perform11test(digits);
 
-    // check if they pass the 11-test
-    pass11 = this.perform11test(digits);
+      // 11-test failed
+      if (!pass11) {
 
-    // 11-test failed
-    if (!pass11) {
+        // take two random digits
+        p1 = this.tosuService.getRandomNumber(0, highestDigit);
+        p2 = this.tosuService.getRandomNumber(0, highestDigit);
 
-      // take two random digits
-      p1 = this.tosuService.getRandomNumber(0, maxDigit);
-      p2 = this.tosuService.getRandomNumber(0, maxDigit);
+        // make sure we didn't select twice the same digit
+        while (p1 === p2) {
+          p2 = this.tosuService.getRandomNumber(0, highestDigit);
+        }
 
-      // make sure we didn't select twice the same digit
-      while (p1 === p2) {
-        p2 = this.tosuService.getRandomNumber(0, maxDigit);
-      }
+        for (j = 0; j < count && pass11 === false; j++) {
+          digits[p1] = j;
+          for (k = 0; k < count && pass11 === false; k++) {
+            digits[p2] = k;
+            pass11 = this.perform11test(digits);
+          }
+        }
 
-      for (j = 0; j <= maxDigit && pass11 === false; j++) {
-        digits[p1] = j;
-        for (k = 0; k <= maxDigit && pass11 === false; k++) {
-          digits[p2] = k;
-          pass11 = this.perform11test(digits);
+        // Re-evaluate pass11
+        if (!pass11) {
+          // We went through all options without success. Start over.
+          this.getNumbers(count, elevenTest);
         }
       }
-
-      // Re-evaluate pass11
-      if (!pass11) {
-        // We went through all options without success. Start over.
-        this.getNumbers(count);
-      }
-
     }
 
-    return digits;
+
+
+    return parseInt(digits.join(''), 10);
   }
 
 
-  getLetterValue(letters: string) {
-    let i = 0;
-    let letterValue = '';
 
+  getModulo(bankIdentification: string[], digits: number, nrOfDigits: number): number {
+
+    // 1. Convert bank identification and digits to number
+    const identification: number = parseInt(bankIdentification[0], 10);
+    
+
+    // 2. Make one number from identifciation and digits
+    let number: number = (identification * Math.pow(10, nrOfDigits)) + digits;
+    
+    
+    // 3. Calculate modulo
+    let modulo: number = number % 97;
+    
+
+    // 4. Append modulo to number
+    let modDigit1: string = '0';
+    let modDigit2: string = '0';
+
+    if (modulo === 0) {
+      // If modulo === 0 then, take 97 as check sum
+      modDigit1 = '9';
+      modDigit2 = '7';    
+    } else if (modulo <= 9) {
+      // If modulo <= 9, first digit is 0
+      modDigit1 = '0';
+      modDigit2 = ('' + modulo)[0];    
+    } else {
+      modDigit1 = ('' + modulo)[0];
+      modDigit2 = ('' + modulo)[1];
+    }
+    
+    number = parseInt('' + digits + modDigit1 + modDigit2, 10);
+
+
+    // 5. Return new digits with modulo at the end
+    return number;
+
+  }
+
+
+  getLetterValue(letters: string): string {
+    let i: number = 0;
+    let letterValue: string = '';
 
     for (i = 0; i < letters.length; i++) {
       // 'A' === 65, but we need it as 10
       letterValue += letters.charCodeAt(i) - 55;
     }
-    return letterValue;
 
+    return letterValue;
   }
 
-  perform11test(nr: number[]) {
-    let sum = 0;
-    let j = 0;
-    let i = 0;
+  perform11test(nr: number[]): boolean {
+    let sum: number = 0;
+    let j: number = 0;
+    let i: number = 0;
 
     for (i = 10; i >= 1; i--) {
       sum += nr[j] * i;
@@ -127,10 +249,17 @@ export class BankaccountService {
   }
 
 
-  calculateCheckSum(country: string, bankIdentification: string[], numbers: number[]) {
+  calculateCheckSum(country: string, bankIdentification: string[], numbers: number): string {
     const countryValue = this.getLetterValue(country);
-    const checkCombination = bankIdentification[1] + numbers.join('') + countryValue + '00';
+    let identification: string = '';
 
+    if (country === 'NL') {
+      identification = this.getLetterValue(bankIdentification[0]);
+    } else {
+      identification = bankIdentification[0];
+    }
+
+    const checkCombination = identification + numbers + countryValue + '00';
 
     /*
     Piece-wise calculation D mod 97 can be done in many ways. One such way is as follows:
@@ -144,15 +273,15 @@ export class BankaccountService {
         5. Calculate 98 - final result
     */
 
-    let accString = checkCombination;
+    let accString: string = checkCombination;
     let checkNr: string;
     let modNr: number;
-    let result: number;
+    let checkSum: number;
+    let result: string;
 
 
     checkNr = accString.substring(0, 9);
     modNr = parseInt(checkNr, 10) % 97;
-
 
     accString = accString.substring(9, accString.length);
 
@@ -166,7 +295,14 @@ export class BankaccountService {
       }
     }
 
-    result = 98 - modNr;
+    checkSum = 98 - modNr;
+
+    // If checksum <= 9; add a leading 0.
+    if (checkSum <= 9) {
+      result = ('0' + checkSum);
+    } else {
+      result = ('' + checkSum);
+    }
 
     return result;
   }

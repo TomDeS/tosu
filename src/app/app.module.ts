@@ -5,6 +5,8 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { BankaccountModule } from './bankaccounts/bankaccount.module';
 import { PlayerModule } from './players/player.module';
@@ -18,6 +20,8 @@ import { ShopModule } from './shop/shop.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule, // for database
     BankaccountModule,
     PlayerModule,
     ShopModule

@@ -1,0 +1,14 @@
+<div class="card">
+  <h3>Foodz</h3>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let product of allProducts; let i = index;">
+      {{ product.category }}:
+      {{ product.title }}
+      <button (click)="addProductstoCart(product)" class="btn btn-outline-primary">
+        {{ product.price | currency:'EUR'}}
+        |
+        +
+      </button>
+    </li>
+  </ul>
+</div>
