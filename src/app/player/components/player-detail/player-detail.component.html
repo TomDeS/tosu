@@ -1,0 +1,10 @@
+<ul>
+    <li *ngFor="let player of players; let i = index;">
+        {{player.name}}
+        <div class="progress">
+            <div class="progress-bar" id="{{ 'progress-bar' + i }}" role="progressbar" style.width="{{player.score}}%">
+                {{player?.score}} points
+            </div>
+        </div>
+    </li>
+</ul>

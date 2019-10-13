@@ -1,0 +1,17 @@
+<div class="card">
+    <button (click)="generateAccounts([['Belgian', 'BE'], ['Dutch', 'NL']])" class="btn btn-outline-primary">
+        Generate another set
+    </button>
+    <button (click)="generateAccounts([['Belgian', 'BE']])" class="btn btn-outline-primary">
+        Generate Belgian account
+    </button>
+    <button (click)="generateAccounts([['Dutch', 'NL']])" class="btn btn-outline-primary">
+        Generate Dutch account
+    </button>
+
+    <ul>
+        <li *ngFor="let account of accounts; let i = index;">
+            Random valid {{account.country}} bank account: {{account.account}}
+        </li>
+    </ul>
+</div>
