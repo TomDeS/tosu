@@ -14,7 +14,7 @@ import { NyanService } from '../../nyan.service';
 export class PlayerNyanComponent implements OnInit {
   @Input() players: Player[];
 
-  @ViewChild('nyanCanvas', {static: false}) nyanCanvas: ElementRef;
+  @ViewChild('nyanCanvas') nyanCanvas: ElementRef;
   public context: CanvasRenderingContext2D;
 
 
